@@ -21,10 +21,12 @@ jobs:
         echo "TARGET_NUMBER=$TARGET_NUMBER" >> $GITHUB_ENV
         if [ "$RANDOM_NUMBER" -ne "$TARGET_NUMBER" ]; then
           echo "This run is skipped."
-          exit 0
+          echo "run=false" >> $GITHUB_ENV
+        else
+          echo "run=true" >> $GITHUB_ENV
 
     - name: add noise
-      if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
+      if: env.run == 'true'
       run: |
         echo " " >> README.md
         git config user.name "amrragab8080"
@@ -32,6 +34,8 @@ jobs:
         git add .
         git commit -m "Random green for fun!"
         git push
+      env:
+        GITHUB_ENV: $GITHUB_ENV
 
     - name: Push changes
       if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
@@ -39,3 +43,5 @@ jobs:
         ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
       run: |
         git push https://amrragab8080:${{ secrets.ACTIONS_PAT }}@github.com/amrragab8080/myego.git
+      env:
+        GITHUB_ENV: $GITHUB_ENV
