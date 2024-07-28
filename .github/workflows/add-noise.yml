@@ -15,7 +15,7 @@ jobs:
     - name: Check if should run
       id: check_run
       run: |
-        RANDOM_NUMBER=$((RANDOM % 100 + 1))
+        RANDOM_NUMBER=$(shuf -i 1-100 -n 1)
         TARGET_NUMBER=$(shuf -i 1-100 -n 1)
         echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
         echo "TARGET_NUMBER=$TARGET_NUMBER" >> $GITHUB_ENV
