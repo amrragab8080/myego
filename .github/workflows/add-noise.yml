@@ -22,7 +22,7 @@ jobs:
         echo "random is: $RANDOM_NUMBER"
         echo "target is: $TARGET_NUMBER"
         if [ $(expr $RANDOM_NUMBER) -gt $(expr $TARGET_NUMBER) ]; then
-          echo "This run is skipped."
+          echo "This run will proceed."
           echo "run=true" >> $GITHUB_ENV
         else
           echo "run=false" >> $GITHUB_ENV
