@@ -23,9 +23,9 @@ jobs:
         echo "target is: $TARGET_NUMBER"
         if [ $(expr $RANDOM_NUMBER) -gt $(expr $TARGET_NUMBER) ]; then
           echo "This run is skipped."
-          echo "run=false" >> $GITHUB_ENV
-        else
           echo "run=true" >> $GITHUB_ENV
+        else
+          echo "run=false" >> $GITHUB_ENV
         fi
 
     - name: add noise
