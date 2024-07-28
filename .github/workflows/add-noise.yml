@@ -25,6 +25,7 @@ jobs:
           echo "This run will proceed."
           echo "run=true" >> $GITHUB_ENV
         else
+          echo "This run is skipped."
           echo "run=false" >> $GITHUB_ENV
         fi
 
