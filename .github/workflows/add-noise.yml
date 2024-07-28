@@ -34,12 +34,11 @@ jobs:
         git config user.email "informaticsdev@gmail.com"
         git add .
         git commit -m "Random green for fun!"
-        git push
       env:
         GITHUB_ENV: $GITHUB_ENV
 
     - name: Push changes
-      if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
+      if: env.run =='true'
       env:
         ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
         GITHUB_ENV: $GITHUB_ENV
