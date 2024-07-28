@@ -1,4 +1,4 @@
-name: yc-job-getter
+name: add-noise
 
 on:
   schedule:
@@ -23,14 +23,14 @@ jobs:
           echo "This run is skipped."
           exit 0
 
-    - name: Trick Garry for $$$
+    - name: add noise
       if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
       run: |
         echo " " >> README.md
         git config user.name "amrragab8080"
         git config user.email "informaticsdev@gmail.com"
         git add .
-        git commit -m "Always green!"
+        git commit -m "Random green for fun!"
         git push
 
     - name: Push changes
