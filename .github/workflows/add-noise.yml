@@ -1,4 +1,4 @@
-name: add-noise
+name: yc-job-getter
 
 on:
   schedule:
@@ -22,14 +22,20 @@ jobs:
         if [ "$RANDOM_NUMBER" -ne "$TARGET_NUMBER" ]; then
           echo "This run is skipped."
           exit 0
-        fi
 
-    - name: lets add noise
+    - name: Trick Garry for $$$
       if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
       run: |
         echo " " >> README.md
-        git config user.name amrragab8080
-        git config user.email informaticsdev@gmail.com
+        git config user.name "amrragab8080"
+        git config user.email "informaticsdev@gmail.com"
         git add .
-        git commit -m "Random green for fun!"
+        git commit -m "Always green!"
         git push
+
+    - name: Push changes
+      if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
+      env:
+        ACTIONS_PAT: ${{ secrets.ACTIONS_PAT }}
+      run: |
+        git push https://amrragab8080:${{ secrets.ACTIONS_PAT }}@github.com/amrragab8080/myego.git
