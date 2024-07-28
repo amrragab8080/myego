@@ -1,4 +1,4 @@
-name: yc-job-getter
+name: add-noise
 
 on:
   schedule:
