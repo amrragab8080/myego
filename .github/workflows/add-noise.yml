@@ -1,0 +1,35 @@
+name: yc-job-getter
+
+on:
+  schedule:
+    - cron: '* * * * *'  # Runs every minute
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Check if should run
+      id: check_run
+      run: |
+        RANDOM_NUMBER=$((RANDOM % 100 + 1))
+        TARGET_NUMBER=$(shuf -i 1-100 -n 1)
+        echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
+        echo "TARGET_NUMBER=$TARGET_NUMBER" >> $GITHUB_ENV
+        if [ "$RANDOM_NUMBER" -ne "$TARGET_NUMBER" ]; then
+          echo "This run is skipped."
+          exit 0
+        fi
+
+    - name: lets add noise
+      if: steps.check_run.outputs.TARGET_NUMBER == steps.check_run.outputs.RANDOM_NUMBER
+      run: |
+        echo " " >> README.md
+        git config user.name amrragab8080
+        git config user.email informaticsdev@gmail.com
+        git add .
+        git commit -m "Random green for fun!"
+        git push
