@@ -2,7 +2,7 @@ name: add-noise
 
 on:
   schedule:
-    - cron: '* * * * *'  # Runs every minute
+    - cron: '*/5 * * * *'  # Runs every minute
   workflow_dispatch:
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
         TARGET_NUMBER=$(shuf -i 1-100 -n 1)
         echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
         echo "TARGET_NUMBER=$TARGET_NUMBER" >> $GITHUB_ENV
-        if [ "$RANDOM_NUMBER" -ne "$TARGET_NUMBER" ]; then
+        if [ "$RANDOM_NUMBER" -gt "$TARGET_NUMBER" ]; then
           echo "This run is skipped."
           echo "run=false" >> $GITHUB_ENV
         else
