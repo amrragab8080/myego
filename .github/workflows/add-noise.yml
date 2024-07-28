@@ -20,7 +20,7 @@ jobs:
         echo "RANDOM_NUMBER=$RANDOM_NUMBER" >> $GITHUB_ENV
         echo "TARGET_NUMBER=$TARGET_NUMBER" >> $GITHUB_ENV
         echo "random is: $RANDOM_NUMBER"
-        echo "target is: TARGET_NUMBER"
+        echo "target is: $TARGET_NUMBER"
         if [ "$RANDOM_NUMBER" -gt "$TARGET_NUMBER" ]; then
           echo "This run is skipped."
           echo "run=false" >> $GITHUB_ENV
