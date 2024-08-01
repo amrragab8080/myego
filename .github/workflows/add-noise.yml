@@ -2,7 +2,7 @@ name: add-noise
 
 on:
   schedule:
-    - cron: '*/20 * * * *'  # Runs every minute
+    - cron: '* */4 * * *'  # Runs every 4 hours
   workflow_dispatch:
 
 jobs:
